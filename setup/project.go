@@ -44,7 +44,7 @@ func (p *Project) Detect() error {
 		return fmt.Errorf("failed to parse go.mod in working directory: %w", err)
 	}
 
-	p.ProjectRelPath = path.Clean(strings.TrimPrefix(wd, p.RepositoryRoot))
+	p.ProjectRelPath = path.Join(".", path.Clean(strings.TrimPrefix(wd, p.RepositoryRoot)))
 	if p.ProjectRelPath != "." {
 		p.Nested = true
 	}
