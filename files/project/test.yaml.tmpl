@@ -6,11 +6,10 @@ on:
       - main
       - "release/*"
     paths:
-      - "{{.ProjectRelPath}}/**"
- 
+      - "{{.ProjectRelGlob}}"
   pull_request:
     paths:
-      - "{{.ProjectRelPath}}/**"
+      - "{{.ProjectRelGlob}}"
 defaults:
   run:
     working-directory:  "{{.ProjectRelPath}}"

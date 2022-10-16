@@ -6,11 +6,10 @@ on:
       - main
       - "release/*"
     paths:
-      - "/**"
- 
+      - "**"
   pull_request:
     paths:
-      - "/**"
+      - "**"
 defaults:
   run:
     working-directory:  ""

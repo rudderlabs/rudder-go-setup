@@ -18,6 +18,7 @@ type Project struct {
 	ProjectPath    string
 	RepositoryRoot string
 	ProjectRelPath string // relative path to repo root
+	ProjectRelGlob string // relative path to repo root with glob pattern
 	Nested         bool
 }
 
@@ -48,6 +49,8 @@ func (p *Project) Detect() error {
 	if p.ProjectRelPath != "." {
 		p.Nested = true
 	}
+
+	p.ProjectRelGlob = path.Join(p.ProjectRelPath, "**")
 
 	p.GoVersion = mfile.Go.Version
 	p.Name = path.Base(mfile.Module.Mod.Path)
