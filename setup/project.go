@@ -15,9 +15,7 @@ import (
 	"golang.org/x/mod/modfile"
 )
 
-var (
-	emptyComment = regexp.MustCompile(`^\s*#\s*$`)
-)
+var emptyComment = regexp.MustCompile(`^\s*#\s*$`)
 
 type Project struct {
 	Name           string
