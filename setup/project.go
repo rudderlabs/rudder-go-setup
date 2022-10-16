@@ -69,7 +69,7 @@ func (p *Project) Init() error {
 	for src, dest := range projectFiles {
 		fmt.Printf("Adding %s \n", dest)
 
-		f, err := os.OpenFile(path.Join(p.ProjectPath, dest), os.O_RDWR|os.O_CREATE, 0o666)
+		f, err := os.Create(path.Join(p.ProjectPath, dest))
 		if err != nil {
 			return err
 		}

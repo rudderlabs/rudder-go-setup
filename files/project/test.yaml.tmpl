@@ -28,7 +28,7 @@ jobs:
       with:
         check-latest: true
         cache: true
-        go-version: '~1.18.5'
+        go-version: '{{.GoVersion}}.x'
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - run: make test
@@ -42,7 +42,7 @@ jobs:
       with:
         check-latest: true
         cache: true
-        go-version: '~1.18.5'
+        go-version: '{{.GoVersion}}.x'
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - name: golangci-lint
@@ -58,7 +58,7 @@ jobs:
         with:
           check-latest: true
           cache: true
-          go-version: '~1.18.5'
+          go-version: '{{.GoVersion}}.x'
       - run: go mod tidy
       - run: git diff --exit-code go.mod
       - name: Error message
