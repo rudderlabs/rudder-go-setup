@@ -48,7 +48,9 @@ jobs:
     - name: golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
-        version: v1.49.0
+        version: v1.50.0
+        working-directory: {{.ProjectRelPath}}
+
   generate:
     name: Correctly generated files
     runs-on: ubuntu-latest
