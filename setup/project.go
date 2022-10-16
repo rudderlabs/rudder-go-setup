@@ -25,7 +25,7 @@ func (p *Project) Detect() error {
 	if err != nil {
 		return fmt.Errorf("failed to detect repository root: %w", err)
 	}
-	p.RepositoryRoot = path.Base(strings.TrimSpace(string(out)))
+	p.RepositoryRoot = path.Clean(strings.TrimSpace(string(out)))
 
 	wd, err := os.Getwd()
 	if err != nil {

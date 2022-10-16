@@ -40,7 +40,7 @@ func Init() *cli.Command {
 				return err
 			}
 
-			fmt.Println(p)
+			fmt.Printf("%+v\n", p)
 			if err := p.Init(); err != nil {
 				return err
 			}

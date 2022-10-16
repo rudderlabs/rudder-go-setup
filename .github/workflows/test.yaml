@@ -7,12 +7,12 @@ on:
       - "release/*"
   pull_request:
     paths:
-      - "/Users/leonidas/src/rudder/rudder-go-setup/**"
+      - "./**"
 
 defaults:
   run:
     shell: bash
-    working-directory:  "/Users/leonidas/src/rudder/rudder-go-setup"
+    working-directory:  "."
 
 jobs:
   test:
@@ -73,4 +73,6 @@ jobs:
       # - name: Error message
       #   if: ${{ failure() }}
       #   run: echo '::error file=Makefile,line=11,col=1::Incorrectly generated files. Ensure you have run `make mocks` and committed the files locally.'
+
+erated files. Ensure you have run `make mocks` and committed the files locally.'
 
