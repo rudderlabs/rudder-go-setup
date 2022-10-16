@@ -5,16 +5,15 @@ on:
       - master
       - main
       - "release/*"
-  pull_request:
-    
     paths:
-      - "./examples/monorepo/**"
-    
+      - "examples/monorepo/**"
+  pull_request:
+    paths:
+      - "examples/monorepo/**"
 
 defaults:
   run:
-    working-directory:  "./examples/monorepo"
-
+    working-directory:  "examples/monorepo"
 
 jobs:
   test:
@@ -48,7 +47,7 @@ jobs:
       uses: golangci/golangci-lint-action@v3
       with:
         version: v1.50.0
-        working-directory: examples/monorepo
+        working-directory: "examples/monorepo"
 
   generate:
     name: Correctly generated files
@@ -77,4 +76,3 @@ jobs:
       # - name: Error message
       #   if: ${{ failure() }}
       #   run: echo '::error file=Makefile,line=11,col=1::Incorrectly generated files. Ensure you have run `make mocks` and committed the files locally.'
-

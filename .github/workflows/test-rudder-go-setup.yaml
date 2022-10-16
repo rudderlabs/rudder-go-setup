@@ -6,8 +6,6 @@ on:
       - main
       - "release/*"
   pull_request:
-    
-
 
 
 jobs:
@@ -42,7 +40,6 @@ jobs:
       uses: golangci/golangci-lint-action@v3
       with:
         version: v1.50.0
-        working-directory: .
 
   generate:
     name: Correctly generated files
@@ -69,6 +66,3 @@ jobs:
       # - run: make mocks
       # - run: git diff --exit-code
       # - name: Error message
-      #   if: ${{ failure() }}
-      #   run: echo '::error file=Makefile,line=11,col=1::Incorrectly generated files. Ensure you have run `make mocks` and committed the files locally.'
-
