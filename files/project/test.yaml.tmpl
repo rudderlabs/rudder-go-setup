@@ -5,16 +5,15 @@ on:
       - master
       - main
       - "release/*"
-  pull_request:
-    {{ if .Nested }}
     paths:
-      - "./{{.ProjectRelPath}}/**"
-    {{ end }}
-{{ if .Nested }}
+      - "{{.ProjectRelPath}}/**"
+ 
+  pull_request:
+    paths:
+      - "{{.ProjectRelPath}}/**"
 defaults:
   run:
-    working-directory:  "./{{.ProjectRelPath}}"
-{{ end }}
+    working-directory:  "{{.ProjectRelPath}}"
 
 jobs:
   test:
@@ -48,7 +47,7 @@ jobs:
       uses: golangci/golangci-lint-action@v3
       with:
         version: v1.50.0
-        working-directory: {{.ProjectRelPath}}
+        working-directory: "{{.ProjectRelPath}}"
 
   generate:
     name: Correctly generated files
