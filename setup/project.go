@@ -89,7 +89,7 @@ func (p *Project) Init() error {
 
 	for src, dest := range repoFiles {
 		if _, err := os.Stat(dest); os.IsNotExist(err) {
-			err = os.MkdirAll(path.Dir(dest), 0700)
+			err = os.MkdirAll(path.Dir(dest), 0o700)
 			if err != nil {
 				return err
 			}
