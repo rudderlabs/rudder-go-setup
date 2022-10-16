@@ -6,13 +6,9 @@ on:
       - main
       - "release/*"
   pull_request:
-    paths:
-      - "./**"
+    
 
-defaults:
-  run:
-    shell: bash
-    working-directory:  "."
+
 
 jobs:
   test:
@@ -73,6 +69,4 @@ jobs:
       # - name: Error message
       #   if: ${{ failure() }}
       #   run: echo '::error file=Makefile,line=11,col=1::Incorrectly generated files. Ensure you have run `make mocks` and committed the files locally.'
-
-erated files. Ensure you have run `make mocks` and committed the files locally.'
 

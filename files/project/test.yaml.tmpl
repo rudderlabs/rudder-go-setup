@@ -6,13 +6,16 @@ on:
       - main
       - "release/*"
   pull_request:
+    {{ if .Nested }}
     paths:
       - "{{.ProjectRelPath}}/**"
+    {{ end }}
 
+{{ if .Nested }}
 defaults:
   run:
-    shell: bash
     working-directory:  "{{.ProjectRelPath}}"
+{{ end }}
 
 jobs:
   test:
