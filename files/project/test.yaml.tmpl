@@ -5,11 +5,15 @@ on:
       - master
       - main
       - "release/*"
+    #{{if .Nested}}
     paths:
-      - "{{.ProjectRelGlob}}"
+      - "{{.ProjectRelPath}}/**"
+    #{{end}}
   pull_request:
+    #{{if .Nested}}
     paths:
-      - "{{.ProjectRelGlob}}"
+      - "{{.ProjectRelPath}}/**"
+    #{{end}}
 defaults:
   run:
     working-directory:  "{{.ProjectRelPath}}"
@@ -75,4 +79,3 @@ jobs:
       # - name: Error message
       #   if: {{`${{ failure() }}`}}
       #   run: echo '::error file=Makefile,line=11,col=1::Incorrectly generated files. Ensure you have run `make mocks` and committed the files locally.'
-
