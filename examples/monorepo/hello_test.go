@@ -9,4 +9,6 @@ import (
 
 func TestHello(t *testing.T) {
 	require.Equal(t, "Hello world", monorepo.Hello("world"))
+	require.Equal(t, "Hello human", monorepo.Hello("human"))
+
 }
