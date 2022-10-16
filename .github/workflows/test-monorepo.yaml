@@ -1,4 +1,4 @@
-name: Tests rudder-go-setup
+name: Tests monorepo
 on:
   push:
     branches:
@@ -7,12 +7,19 @@ on:
       - "release/*"
   pull_request:
     
+    paths:
+      - "/examples/monorepo/**"
+    
 
+
+defaults:
+  run:
+    working-directory:  "/examples/monorepo"
 
 
 jobs:
   test:
-    name: "rudder-go-setup test"
+    name: "monorepo test"
     runs-on: 'ubuntu-20.04'
     steps:
     - name: Checkout
@@ -26,7 +33,7 @@ jobs:
     - run: go mod download # Not required, used to segregate module download vs test times
     - run: make test
   linters:
-    name: "rudder-go-setup linters"
+    name: "monorepo linters"
     runs-on: 'ubuntu-20.04'
     steps:
     - name: Checkout
@@ -41,7 +48,9 @@ jobs:
     - name: golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
-        version: v1.49.0
+        version: v1.50.0
+        working-directory: /examples/monorepo
+
   generate:
     name: Correctly generated files
     runs-on: ubuntu-latest

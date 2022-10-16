@@ -84,12 +84,14 @@ func (p *Project) Init() error {
 	}
 
 	repoFiles := map[string]string{
-		"test.yaml.tmpl": ".github/workflows/test.yaml",
+		"test.yaml.tmpl": fmt.Sprintf(".github/workflows/test-%s.yaml", p.Name),
 	}
 
 	for src, dest := range repoFiles {
-		if _, err := os.Stat(dest); os.IsNotExist(err) {
-			err = os.MkdirAll(path.Dir(dest), 0o700)
+		destCanonical := path.Join(p.RepositoryRoot, dest)
+
+		if _, err := os.Stat(destCanonical); os.IsNotExist(err) {
+			err = os.MkdirAll(path.Dir(destCanonical), 0o700)
 			if err != nil {
 				return err
 			}
@@ -97,7 +99,7 @@ func (p *Project) Init() error {
 
 		fmt.Printf("Adding %s \n", dest)
 
-		f, err := os.OpenFile(path.Join(p.ProjectPath, dest), os.O_RDWR|os.O_CREATE, 0o666)
+		f, err := os.Create(destCanonical)
 		if err != nil {
 			return err
 		}
