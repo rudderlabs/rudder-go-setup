@@ -43,7 +43,6 @@ jobs:
       uses: golangci/golangci-lint-action@v3
       with:
         version: v1.50.0
-        working-directory: ""
 
   generate:
     name: Correctly generated files
