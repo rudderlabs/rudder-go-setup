@@ -7,9 +7,6 @@ on:
       - "release/*"
   pull_request:
 
-defaults:
-  run:
-    working-directory:  ""
 
 jobs:
   test:

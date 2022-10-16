@@ -15,9 +15,11 @@ on:
       - "{{.ProjectRelPath}}/**"
     #{{end}}
 
+#{{if .Nested}}
 defaults:
   run:
     working-directory:  "{{.ProjectRelPath}}"
+#{{end}}
 
 jobs:
   test:
