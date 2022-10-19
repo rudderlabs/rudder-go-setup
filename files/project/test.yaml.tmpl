@@ -33,7 +33,10 @@ jobs:
         check-latest: true
         cache: true
         go-version: '{{.GoVersion}}.x'
+        #{{if .Nested}}
         cache-dependency-path: "{{.ProjectRelPath}}/go.sum"
+        #{{end}}
+
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - run: make test
@@ -48,7 +51,9 @@ jobs:
         check-latest: true
         cache: true
         go-version: '{{.GoVersion}}.x'
+        #{{if .Nested}}
         cache-dependency-path: "{{.ProjectRelPath}}/go.sum"
+        #{{end}}
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - name: golangci-lint
@@ -69,7 +74,9 @@ jobs:
           check-latest: true
           cache: true
           go-version: '{{.GoVersion}}.x'
+          #{{if .Nested}}
           cache-dependency-path: "{{.ProjectRelPath}}/go.sum"
+          #{{end}}
       - run: go mod tidy
       - run: git diff --exit-code go.mod
       - name: Error message
