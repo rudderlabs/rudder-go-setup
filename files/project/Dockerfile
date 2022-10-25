@@ -16,7 +16,7 @@ COPY . .
 
 RUN mkdir /builds
 
-RUN for d in */; do; go build -o /builds/${d%/} ./${d}; done
+RUN for d in cmd/*/; do go build -o /builds/${d%/} ./${d}; done
 
 FROM alpine:${ALPINE_VERSION}
 
