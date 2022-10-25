@@ -11,7 +11,7 @@ import (
 )
 
 func TestMain(t *testing.T) {
-	require.NoError(t, os.Chdir("./examples/monorepo"))
+	require.NoError(t, os.Chdir("./examples/monorepo-example"))
 
 	err := main.App.Run([]string{"go-setup", "init"})
 	require.NoError(t, err)

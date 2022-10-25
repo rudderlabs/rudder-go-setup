@@ -3,7 +3,7 @@ package monorepo_test
 import (
 	"testing"
 
-	"github.com/rudderlabs/rudder-go-setup/examples/monorepo"
+	monorepo "github.com/rudderlabs/rudder-go-setup/examples/monorepo-example"
 	"github.com/stretchr/testify/require"
 )
 

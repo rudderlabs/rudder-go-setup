@@ -1,4 +1,4 @@
-module github.com/rudderlabs/rudder-go-setup/examples/monorepo
+module github.com/rudderlabs/rudder-go-setup/examples/monorepo-example
 
 go 1.19
 

@@ -1,0 +1,70 @@
+name: Build {{.Name}}
+
+on:
+  release:
+    types: [created]
+  push:
+    branches:
+      - master
+      - main
+    #{{if .Nested}}
+    paths:
+      - "{{.ProjectRelPath}}/**"
+    #{{end}}
+  pull_request:
+    #{{if .Nested}}
+    paths:
+      - "{{.ProjectRelPath}}/**"
+    #{{end}}
+
+#{{if .Nested}}
+defaults:
+  run:
+    working-directory:  "{{.ProjectRelPath}}"
+#{{end}}
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            name=rudderlabs/{{.Name}}
+  #{{`
+          tags: |
+            type=ref,event=branch
+            type=raw,value=latest,enable=${{ github.event_name == 'release'}}
+            type=raw,value=${{ github.head_ref }}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: rudderlabs
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+        #`}}
+          context: "{{.ProjectRelPath}}"
+        #{{`
+          # platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            COMMIT_HASH=${{ github.sha }}
+            REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+  #`}}
