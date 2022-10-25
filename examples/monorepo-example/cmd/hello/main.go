@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rudderlabs/rudder-go-setup/examples/monorepo"
+	monorepo "github.com/rudderlabs/rudder-go-setup/examples/monorepo-example"
 )
 
 func main() {

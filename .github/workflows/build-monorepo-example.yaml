@@ -1,4 +1,4 @@
-name: builds
+name: Build monorepo-example
 
 on:
   release:
@@ -8,17 +8,17 @@ on:
       - master
       - main
     paths:
-      - "examples/monorepo/**"
+      - "examples/monorepo-example/**"
   pull_request:
     paths:
-      - "examples/monorepo/**"
+      - "examples/monorepo-example/**"
 
 defaults:
   run:
-    working-directory:  "examples/monorepo"
+    working-directory:  "examples/monorepo-example"
 
 jobs:
-  docker-oss:
+  docker:
     runs-on: ubuntu-latest
     steps:
       -
@@ -30,7 +30,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            name=rudderlabs/monorepo
+            name=rudderlabs/monorepo-example
           tags: |
             type=ref,event=branch
             type=raw,value=latest,enable=${{ github.event_name == 'release'}}
@@ -48,7 +48,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "examples/monorepo"
+          context: "examples/monorepo-example"
           # platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

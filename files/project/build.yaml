@@ -1,4 +1,4 @@
-name: builds
+name: Build {{.Name}}
 
 on:
   release:
@@ -24,7 +24,7 @@ defaults:
 #{{end}}
 
 jobs:
-  docker-oss:
+  docker:
     runs-on: ubuntu-latest
     steps:
       -

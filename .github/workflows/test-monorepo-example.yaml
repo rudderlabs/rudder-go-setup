@@ -1,4 +1,4 @@
-name: Tests monorepo
+name: Tests monorepo-example
 on:
   push:
     branches:
@@ -6,18 +6,18 @@ on:
       - main
       - "release/*"
     paths:
-      - "examples/monorepo/**"
+      - "examples/monorepo-example/**"
   pull_request:
     paths:
-      - "examples/monorepo/**"
+      - "examples/monorepo-example/**"
 
 defaults:
   run:
-    working-directory:  "examples/monorepo"
+    working-directory:  "examples/monorepo-example"
 
 jobs:
   test:
-    name: "monorepo test"
+    name: "monorepo-example test"
     runs-on: 'ubuntu-20.04'
     steps:
     - name: Checkout
@@ -27,13 +27,13 @@ jobs:
         check-latest: true
         cache: true
         go-version: '1.19.x'
-        cache-dependency-path: "examples/monorepo/go.sum"
+        cache-dependency-path: "examples/monorepo-example/go.sum"
 
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - run: make test
   linters:
-    name: "monorepo linters"
+    name: "monorepo-example linters"
     runs-on: 'ubuntu-20.04'
     steps:
     - name: Checkout
@@ -43,14 +43,14 @@ jobs:
         check-latest: true
         cache: true
         go-version: '1.19.x'
-        cache-dependency-path: "examples/monorepo/go.sum"
+        cache-dependency-path: "examples/monorepo-example/go.sum"
     - run: go version
     - run: go mod download # Not required, used to segregate module download vs test times
     - name: golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
         version: v1.50.0
-        working-directory: "examples/monorepo"
+        working-directory: "examples/monorepo-example"
 
   generate:
     name: Correctly generated files
@@ -62,7 +62,7 @@ jobs:
           check-latest: true
           cache: true
           go-version: '1.19.x'
-          cache-dependency-path: "examples/monorepo/go.sum"
+          cache-dependency-path: "examples/monorepo-example/go.sum"
       - run: go mod tidy
       - run: git diff --exit-code go.mod
       - name: Error message
