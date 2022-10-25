@@ -68,6 +68,7 @@ func (p *Project) Init() error {
 
 	projectFiles := map[string]string{
 		"Makefile":      "Makefile",
+		"Dockerfile":    "Dockerfile",
 		"golangci.yaml": ".golangci.yaml",
 	}
 
@@ -90,6 +91,7 @@ func (p *Project) Init() error {
 
 	repoFiles := map[string]string{
 		"test.yaml.tmpl": fmt.Sprintf(".github/workflows/test-%s.yaml", p.Name),
+		"build.yaml":     fmt.Sprintf(".github/workflows/build-%s.yaml", p.Name),
 	}
 
 	for src, dest := range repoFiles {
