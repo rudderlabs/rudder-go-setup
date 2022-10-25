@@ -5,6 +5,7 @@ FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 ARG VERSION
 ARG REVISION
 
+WORKDIR /src
 
 COPY go.mod .
 COPY go.sum .
@@ -21,6 +22,5 @@ FROM alpine:${ALPINE_VERSION}
 
 RUN apk -U --no-cache upgrade && \
     apk add --no-cache tzdata ca-certificates postgresql-client curl bash
-
 
 COPY --from=builder /builds .
