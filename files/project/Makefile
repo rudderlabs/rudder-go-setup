@@ -10,7 +10,7 @@ install-tools: ## install necessary tools
 
 .PHONY: lint 
 lint: fmt ## Run linters on all go files
-	docker run --rm -v $(shell pwd):/app:ro -w /app golangci/golangci-lint:v1.49.0 bash -e -c \
+	docker run --rm -v $(shell pwd):/app:ro -w /app golangci/golangci-lint:v1.50 bash -e -c \
 		'golangci-lint run -v --timeout 5m'
 
 .PHONY: fmt 
